@@ -179,11 +179,11 @@ if (isset($_POST['add_category_button'])) {
 
     // Handling redirection based on query result
     if (mysqli_stmt_affected_rows($stmt) > 0) {
-        redirect("edit-product.php?id=$product_id", "Product Updated Successfully");
+        redirect("products.php", "Product Updated Successfully");
     } else {
         redirect("edit-product.php?id=$product_id", "Failed to update product");
     }
-}else if (isset($_POST['delete_product_btn'])) {
+} else if (isset($_POST['delete_product_btn'])) {
     $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
     $product_query = "SELECT * FROM products WHERE id='$product_id' ";
     $product_query_run = mysqli_query($con, $product_query);
@@ -199,5 +199,44 @@ if (isset($_POST['add_category_button'])) {
         redirect("products.php", "Product Deleted Successfully");
     } else {
         redirect("products.php", "Something Went Wrong");
+    }
+} else if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $get_product = ("SELECT * FROM products Where id ='$id'");
+    $get_product_run = mysqli_query($con, $get_product);
+
+
+    if ($get_product_run->num_rows > 0) {
+        $row = $get_product_run->fetch_assoc();
+        // Prepare data for the new product (excluding ID)
+        $category_id = $row['category_id'];
+        $name = $row['name'] . " (Copy)";
+        $slug = $row['slug'];
+        $small_description = $row['small_description'];
+        $description = $row['description'];
+        $orignal_price = $row['orignal_price'];
+        $selling_price = $row['selling_price'];
+        $quantity = $row['qty'];
+        $meta_title = $row['meta_title'];
+        $meta_description = $row['meta_description'];
+        $meta_keywords = $row['meta_keywords'];
+        $status = $row['status'];
+        $trending = $row['trending'];
+        $image = $row['image'];
+
+
+        $dup_product_query = "INSERT INTO products (category_id, name, slug, small_description, description, orignal_price, selling_price,
+                qty, meta_title, meta_description, meta_keywords, status, trending, image) VALUES ('$category_id', '$name', '$slug',
+                '$small_description', '$description', '$orignal_price', '$selling_price', '$quantity', '$meta_title', '$meta_description',
+                '$meta_keywords', '$status', '$trending', '$image')";
+
+        $dup_product_query_run = mysqli_query($con, $dup_product_query);
+
+        if ($dup_product_query_run) {
+            redirect("products.php", "Product Duplicate Successfully");
+        } else {
+            redirect("products.php", "Something Went Wrong");
+        }
     }
 }

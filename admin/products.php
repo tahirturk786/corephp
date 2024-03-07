@@ -68,16 +68,22 @@ include('../middleware/adminMiddleware.php')
                                             <span class="text-secondary text-xs font-weight-bold"><?= $item['created_at']; ?></span>
                                         </td>
                                         <td class="align-middle text-center d-flex justify-content-center">
-                                            <span class="badge badge-sm bg-gradient-success mr-2">
-                                                <a href="edit-product.php?id=<?= $item['id']; ?>" class="text-white" data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
+                                            <span class=" mr-2">
+                                                <a href="edit-product.php?id=<?= $item['id']; ?>" data-toggle="tooltip"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            </span>
+
+
+
+                                            <span class="ms-2">
+                                                <a href="code.php?id=<?= $item['id']; ?>" data-toggle="tooltip">
+                                                    <i class="fa-solid fa-copy"></i>
                                                 </a>
                                             </span>
                                             <form action="code.php" method="POST">
                                                 <span class="ms-2">
                                                     <input type="hidden" name="product_id" value="<?= $item['id']; ?>">
-                                                    <button type="submit" class="border-0 text-white badge badge-sm bg-gradient-danger border" name="delete_product_btn">
-                                                        Delete
+                                                    <button type="submit" class="border-0" name="delete_product_btn">
+                                                        <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </span>
                                             </form>

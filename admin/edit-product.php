@@ -11,9 +11,7 @@ include('../middleware/adminMiddleware.php');
             <?php
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
-                $product = mysqli_query($con, "SELECT products.*, categories.id AS category_id, categories.name AS category_name
-                FROM products
-                JOIN categories ON products.category_id = categories.id");
+                $product = mysqli_query($con, "SELECT * FROM products WHERE id = $id");
                 if (mysqli_num_rows($product) > 0) {
 
                     $data = mysqli_fetch_array($product);

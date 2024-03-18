@@ -196,9 +196,11 @@ if (isset($_POST['add_category_button'])) {
         if (file_exists("../uploads/" . $image)) {
             unlink("../uploads/" . $image);
         }
-        redirect("products.php", "Product Deleted Successfully");
+        //redirect("products.php", "Product Deleted Successfully");
+        echo 200;
     } else {
-        redirect("products.php", "Something Went Wrong");
+       // redirect("products.php", "Something Went Wrong");
+       echo 500;
     }
 } else if (isset($_GET['id'])) {
     $id = $_GET['id'];

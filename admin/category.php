@@ -14,7 +14,7 @@ include('../middleware/adminMiddleware.php');
                             <h6 class="text-white text-capitalize ps-3">All Categories</h6>
                         </div>
                     </div>
-                    <div class="card-body px-0 pb-2">
+                    <div class="card-body px-0 pb-2" id="category_table">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -64,7 +64,7 @@ include('../middleware/adminMiddleware.php');
                                             <form action="code.php" method="POST">
                                                 <span class="ms-2">
                                                     <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                    <button type="submit" class="border-0 text-white badge badge-sm bg-gradient-danger border" name="delete_category_btn">
+                                                    <button type="submit" class="border-0 text-white badge badge-sm bg-gradient-danger border delete_category" name="delete_category_btn" value="<?= $item['id']; ?>">
                                                         Delete
                                                     </button>
                                                 </span>

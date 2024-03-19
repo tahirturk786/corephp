@@ -26,7 +26,7 @@ if (isset($_POST['add_category_button'])) {
 
     if ($cate_query_run) {
         move_uploaded_file($temp_image, $path . '/' . $filename);
-        redirect("add-category.php", "Category Added Successfully");
+        redirect("category.php", "Category Added Successfully");
     } else {
         redirect("add-category.php", "Something Went Wrong");
     }
@@ -85,9 +85,11 @@ if (isset($_POST['add_category_button'])) {
         if (file_exists("../uploads/" . $image)) {
             unlink("../uploads/" . $image);
         }
-        redirect("category.php", "Category Deleted Successfully");
+        //redirect("category.php", "Category Deleted Successfully");
+        echo 200;
     } else {
-        redirect("category.php", "Something Went Wrong");
+        // redirect("category.php", "Something Went Wrong");
+        echo 500;
     }
 } else if (isset($_POST['add_product_button'])) {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
@@ -199,8 +201,8 @@ if (isset($_POST['add_category_button'])) {
         //redirect("products.php", "Product Deleted Successfully");
         echo 200;
     } else {
-       // redirect("products.php", "Something Went Wrong");
-       echo 500;
+        // redirect("products.php", "Something Went Wrong");
+        echo 500;
     }
 } else if (isset($_GET['id'])) {
     $id = $_GET['id'];
